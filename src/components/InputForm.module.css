@@ -1,0 +1,31 @@
+.form {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 1.25rem;
+	padding: 1rem 0;
+	width: 100%;
+}
+
+.form .button,
+.form .input {
+	display: block;
+	border: none;
+	outline: none;
+	height: 100%;
+	padding: 0.5em 1em;
+	font-size: inherit;
+}
+
+.form .button {
+	border-radius: 0 3px 3px 0;
+	font-weight: bold;
+	background-color: rgb(75, 75, 75);
+	color: white;
+	flex-shrink: 0;
+}
+
+.form .input {
+	border-radius: 3px 0 0 3px;
+	width: 100%;
+}

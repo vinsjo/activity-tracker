@@ -1,0 +1,14 @@
+.button {
+	border: none;
+	padding: 0.5em 1em;
+	outline: none;
+}
+
+.button:not(:disabled) {
+	cursor: pointer;
+}
+
+.default {
+	background: rgb(50, 50, 50);
+	color: white;
+}

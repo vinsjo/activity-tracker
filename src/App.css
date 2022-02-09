@@ -2,7 +2,6 @@
 	--cal-border-radius: 5px;
 	--cal-outer-padding: 0.5rem;
 	--cal-grid-gap: calc(var(--cal-outer-padding) * 0.5);
-	--cal-max-width: 640px;
 
 	--cal-bg: rgb(200, 200, 200);
 	--cal-item-bg: rgb(240, 240, 240);
@@ -14,14 +13,22 @@
 	--cal-item-border-current: darkred;
 }
 
+body {
+	background-color: #282c34;
+}
+
 .App {
 	text-align: center;
-	background-color: #282c34;
 	min-height: 100vh;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content: center;
+	/* justify-content: center; */
 	font-size: calc(10px + 2vmin);
 	color: white;
+}
+
+.App > .content {
+	width: 100%;
+	max-width: 768px;
 }

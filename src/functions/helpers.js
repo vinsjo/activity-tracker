@@ -7,4 +7,9 @@ function getUniqueKeys(count) {
 	return keys;
 }
 
-export { getUniqueKeys };
+function classNames(...names) {
+	if (!Array.isArray(names) || !names.length) return '';
+	return names.filter(name => !!name).join(' ');
+}
+
+export { getUniqueKeys, classNames };

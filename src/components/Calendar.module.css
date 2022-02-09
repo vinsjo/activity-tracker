@@ -1,12 +1,18 @@
 .calendar {
 	width: 100%;
-	max-width: var(--cal-max-width);
+	margin: 1rem auto;
 	background: var(--cal-bg);
 	display: flex;
 	flex-direction: column;
 	padding: var(--cal-outer-padding);
 	gap: var(--cal-outer-padding);
 	border-radius: var(--cal-border-radius);
+	position: relative;
+}
+
+.title {
+	text-align: left;
+	margin-bottom: 1rem;
 }
 
 .grid {
@@ -25,4 +31,10 @@
 	border-radius: var(--cal-border-radius);
 	background: var(--cal-item-bg);
 	color: var(--cal-item-color);
+}
+
+.calendar .delete {
+	position: absolute;
+	top: var(--cal-outer-padding);
+	right: var(--cal-outer-padding);
 }

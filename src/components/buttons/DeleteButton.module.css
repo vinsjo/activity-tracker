@@ -1,0 +1,23 @@
+.button {
+	background: transparent;
+	border-radius: 50%;
+	aspect-ratio: 1;
+	height: 2rem;
+	width: auto;
+	padding: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.button svg {
+	fill: white;
+	height: 100%;
+	width: auto;
+}
+
+@media (hover: hover) {
+	.button:hover svg {
+		fill: red;
+	}
+}
