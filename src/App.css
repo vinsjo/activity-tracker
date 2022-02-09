@@ -1,3 +1,19 @@
+:root {
+	--cal-border-radius: 5px;
+	--cal-outer-padding: 0.5rem;
+	--cal-grid-gap: calc(var(--cal-outer-padding) * 0.5);
+	--cal-max-width: 640px;
+
+	--cal-bg: rgb(200, 200, 200);
+	--cal-item-bg: rgb(240, 240, 240);
+	--cal-item-color: rgb(40, 40, 40);
+	--cal-item-color-completed: white;
+	--cal-item-bg-completed: green;
+	--cal-item-bg-disabled: rgb(200, 200, 200);
+	--cal-item-color-disabled: rgb(128, 128, 128);
+	--cal-item-border-current: darkred;
+}
+
 .App {
 	text-align: center;
 	background-color: #282c34;
