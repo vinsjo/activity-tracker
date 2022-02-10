@@ -1,17 +1,15 @@
 import { useState, useEffect } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 import dayjs from 'dayjs';
 import styles from './Calendar.module.css';
 import { DateButton, DeleteButton } from './buttons';
 
-function createDates() {
+function createMonth() {
 	const now = dayjs();
 	const last = now.date(now.daysInMonth()).day(7);
 	let current = now.date(1).day(1);
 	const dates = [];
 	while (current.valueOf() <= last.valueOf()) {
 		dates.push({
-			key: uuidv4(),
 			date: current,
 			value: current.format('YYYY-MM-DD'),
 			completed: false,
@@ -22,14 +20,7 @@ function createDates() {
 }
 
 function Calendar({ uid, title, completed, onClick, onDelete }) {
-	const [dates, setDates] = useState(createDates());
-
-	const handleClick = e => {
-		const { value } = e.target;
-		const date = dates.find(date => date.value === value);
-		if (!date) return;
-		onClick && onClick({ uid, value });
-	};
+	const [dates, setDates] = useState(createMonth());
 
 	useEffect(() => {
 		if (!completed || !Array.isArray(completed)) return;
@@ -41,39 +32,42 @@ function Calendar({ uid, title, completed, onClick, onDelete }) {
 		);
 	}, [completed]);
 
+	function handleDateClick(e) {
+		const { value } = e.target;
+		const date = dates.find(date => date.value === value);
+		if (!date) return;
+		onClick && onClick({ uid, value });
+	}
+
+	function createWeekdays() {
+		return ['M', 'T', 'W', 'T', 'F', 'S', 'S'].map((day, i) => (
+			<h5 key={`weekday_header_${i}`} className={styles.weekday}>
+				{day}
+			</h5>
+		));
+	}
+
+	function createDateGrid() {
+		return dates.map(({ date, value, completed }) => (
+			<DateButton
+				key={value}
+				date={date}
+				value={value}
+				completed={completed}
+				onClick={handleDateClick}
+			/>
+		));
+	}
+
 	return (
 		<div className={styles.calendar}>
-			{title ? <h3 className={styles.title}>{title}</h3> : ''}
-			{onDelete ? (
-				<DeleteButton
-					className={styles.delete}
-					onClick={() => onDelete({ uid })}
-				/>
-			) : (
-				''
-			)}
-			<div className={styles.grid}>
-				{['M', 'T', 'W', 'T', 'F', 'S', 'S'].map((day, i) => {
-					return (
-						<h5 key={`weekday_${i}`} className={styles.weekday}>
-							{day}
-						</h5>
-					);
-				})}
-			</div>
-			<div className={styles.grid}>
-				{dates.map(({ key, date, value, completed }) => {
-					return (
-						<DateButton
-							key={key}
-							date={date}
-							value={value}
-							completed={completed}
-							onClick={handleClick}
-						/>
-					);
-				})}
-			</div>
+			<h3 className={styles.title}>{title}</h3>
+			<DeleteButton
+				className={styles.delete}
+				onClick={() => onDelete && onDelete({ uid })}
+			/>
+			<div className={styles.grid}>{createWeekdays()}</div>
+			<div className={styles.grid}>{createDateGrid()}</div>
 		</div>
 	);
 }

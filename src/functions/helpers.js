@@ -12,24 +12,4 @@ function classNames(...names) {
 	return names.filter(name => !!name).join(' ');
 }
 
-function json_encode(data) {
-	try {
-		const json = JSON.stringify(data);
-		return json;
-	} catch (e) {
-		console.error(e);
-		return null;
-	}
-}
-
-function json_decode(json) {
-	try {
-		const data = JSON.parse(json);
-		return data;
-	} catch (e) {
-		console.error(e);
-		return null;
-	}
-}
-
-export { getUniqueKeys, classNames, json_decode, json_encode };
+export { getUniqueKeys, classNames };
