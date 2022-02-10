@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import useLocalStorage from './hooks/useLocalStorage';
 import Calendar from './components/Calendar';
 import InputForm from './components/InputForm';
 import './App.css';
@@ -14,32 +15,8 @@ function createActivity(title) {
 	};
 }
 
-function getStoredActivities() {
-	try {
-		const stored = localStorage.getItem(LOCAL_STORAGE_KEY);
-		if (!stored) {
-			localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify([]));
-			return [];
-		}
-		return JSON.parse(stored);
-	} catch (e) {
-		return [];
-	}
-}
-
-function storeActivities(activities) {
-	try {
-		const json = JSON.stringify(activities);
-		localStorage.setItem(LOCAL_STORAGE_KEY, json);
-	} catch (e) {
-		console.error(e);
-	}
-}
-
-console.log(getStoredActivities());
-
 function App() {
-	const [activities, setActivities] = useState(getStoredActivities());
+	const [activities, setActivities] = useLocalStorage(LOCAL_STORAGE_KEY);
 
 	const handleSubmit = useCallback(
 		input => {
@@ -70,10 +47,6 @@ function App() {
 		},
 		[activities, setActivities]
 	);
-
-	useEffect(() => {
-		storeActivities(activities);
-	}, [activities, setActivities]);
 
 	return (
 		<div className="App">
