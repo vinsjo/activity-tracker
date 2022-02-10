@@ -19,7 +19,7 @@ function createMonth() {
 	return dates;
 }
 
-function Calendar({ uid, title, completed, onClick, onDelete }) {
+function Calendar({ id, title, completed, onClick, onDelete }) {
 	const [dates, setDates] = useState(createMonth());
 
 	useEffect(() => {
@@ -36,7 +36,7 @@ function Calendar({ uid, title, completed, onClick, onDelete }) {
 		const { value } = e.target;
 		const date = dates.find(date => date.value === value);
 		if (!date) return;
-		onClick && onClick({ uid, value });
+		onClick && onClick({ id, value });
 	}
 
 	function createWeekdays() {
@@ -64,7 +64,7 @@ function Calendar({ uid, title, completed, onClick, onDelete }) {
 			<h3 className={styles.title}>{title}</h3>
 			<DeleteButton
 				className={styles.delete}
-				onClick={() => onDelete && onDelete({ uid })}
+				onClick={() => onDelete && onDelete({ id })}
 			/>
 			<div className={styles.grid}>{createWeekdays()}</div>
 			<div className={styles.grid}>{createDateGrid()}</div>

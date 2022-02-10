@@ -7,7 +7,7 @@ import './App.css';
 
 function createActivity(title) {
 	return {
-		uid: uuidv4(),
+		id: uuidv4(),
 		title: title,
 		completed: [],
 	};
@@ -15,7 +15,7 @@ function createActivity(title) {
 
 function App() {
 	const [activities, setActivities] = useLocalStorage(
-		'activity-tracker-activities-storage-key'
+		'activity-tracker-stored-activities'
 	);
 
 	const handleSubmit = useCallback(
@@ -26,8 +26,8 @@ function App() {
 	);
 
 	const handleActivityDateClick = useCallback(
-		({ uid, value }) => {
-			const activity = activities.find(a => a.uid === uid);
+		({ id, value }) => {
+			const activity = activities.find(a => a.id === id);
 			if (!activity) return;
 			const { completed } = activity;
 			const i = completed.indexOf(value);
@@ -39,8 +39,8 @@ function App() {
 	);
 
 	const handleActivityDelete = useCallback(
-		({ uid }) => {
-			const i = activities.findIndex(a => a.uid === uid);
+		({ id }) => {
+			const i = activities.findIndex(a => a.id === id);
 			if (i < 0) return;
 			activities.splice(i, 1);
 			setActivities([...activities]);
@@ -57,11 +57,12 @@ function App() {
 				/>
 			</header>
 			<main className="content">
-				{activities.map(({ uid, title, completed }) => {
+				{activities.map(({ id, title, completed }) => {
+					console.log(id);
 					return (
 						<Calendar
-							key={uid}
-							uid={uid}
+							key={id}
+							id={id}
 							title={title}
 							completed={completed}
 							onClick={handleActivityDateClick}
