@@ -5,8 +5,6 @@ import Calendar from './components/Calendar';
 import InputForm from './components/InputForm';
 import './App.css';
 
-const LOCAL_STORAGE_KEY = 'activity-tracker-activities-storage';
-
 function createActivity(title) {
 	return {
 		uid: uuidv4(),
@@ -16,7 +14,9 @@ function createActivity(title) {
 }
 
 function App() {
-	const [activities, setActivities] = useLocalStorage(LOCAL_STORAGE_KEY);
+	const [activities, setActivities] = useLocalStorage(
+		'activity-tracker-activities-storage-key'
+	);
 
 	const handleSubmit = useCallback(
 		input => {

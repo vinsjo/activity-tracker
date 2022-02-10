@@ -1,31 +1,34 @@
 import { useState, useEffect, useCallback } from 'react';
 
-function useLocalStorage(key) {
-	const [data, setData] = useState([]);
+/**
+ * @param {String} storageKey  key to an item in localStorage
+ */
+function useLocalStorage(storageKey) {
+	const [storedData, setStoredData] = useState([]);
 
-	const setStorage = useCallback(
-		value => {
+	const updateData = useCallback(
+		data => {
 			try {
-				const json = JSON.stringify(value);
-				localStorage.setItem(key, json);
-				setData(value);
+				const json = JSON.stringify(data);
+				localStorage.setItem(storageKey, json);
+				setStoredData(data);
 			} catch (e) {
 				console.error(e);
 			}
 		},
-		[key, data, setData]
+		[storageKey, storedData, setStoredData]
 	);
 
 	useEffect(() => {
 		try {
-			const data = JSON.parse(localStorage.getItem(key));
-			setStorage(data);
+			const data = JSON.parse(localStorage.getItem(storageKey));
+			updateData(data || []);
 		} catch (e) {
 			console.error(e);
 		}
-	}, [key]);
+	}, [storageKey]);
 
-	return [data, setStorage];
+	return [storedData, updateData];
 }
 
 export default useLocalStorage;
