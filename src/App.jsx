@@ -31,11 +31,10 @@ function App() {
 		({ id, value }) => {
 			const activity = activities.find(a => a.id === id);
 			if (!activity) return;
-			const i = activity.completed.indexOf(value);
-			i < 0
-				? activity.completed.push(value)
-				: activity.completed.splice(i, 1);
-			activity.completed = [...activity.completed];
+			const { completed } = activity;
+			const i = completed.indexOf(value);
+			i < 0 ? completed.push(value) : completed.splice(i, 1);
+			activity.completed = [...completed];
 			setActivities([...activities]);
 		},
 		[activities, setActivities]
