@@ -1,10 +1,9 @@
 import { useState, useCallback } from 'react';
-import PIRI from 'pirify';
 
 function storeData(data, storageKey) {
 	try {
 		if (!data) throw 'No data received';
-		const json = PIRI.encode(data);
+		const json = JSON.stringify(data);
 		localStorage.setItem(storageKey, json);
 		return true;
 	} catch (e) {
@@ -15,9 +14,7 @@ function storeData(data, storageKey) {
 function getStoredData(storageKey) {
 	const data = (() => {
 		try {
-			const decoded = PIRI.decode(localStorage.getItem(storageKey));
-			if (!Array.isArray(decoded)) throw 'Invalid PIRI format';
-			return decoded;
+			return JSON.parse(localStorage.getItem(storageKey));
 		} catch (e) {
 			console.error(e);
 			return null;
