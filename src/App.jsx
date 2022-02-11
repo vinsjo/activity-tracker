@@ -1,5 +1,6 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import dayjs from 'dayjs';
 import useLocalStorage from './hooks/useLocalStorage';
 import Calendar from './components/Calendar';
 import InputForm from './components/InputForm';
@@ -9,6 +10,7 @@ function createActivity(title) {
 	return {
 		id: uuidv4(),
 		title: title,
+		month: dayjs().month(),
 		completed: [],
 	};
 }
@@ -57,13 +59,13 @@ function App() {
 				/>
 			</header>
 			<main className="content">
-				{activities.map(({ id, title, completed }) => {
-					console.log(id);
+				{activities.map(({ id, title, month, completed }) => {
 					return (
 						<Calendar
 							key={id}
 							id={id}
 							title={title}
+							month={month}
 							completed={completed}
 							onClick={handleActivityDateClick}
 							onDelete={handleActivityDelete}

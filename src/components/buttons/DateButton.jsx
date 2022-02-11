@@ -6,7 +6,7 @@ import styles from './DateButton.module.css';
 function DateButton({ date, value, completed, onClick }) {
 	return (
 		<Button
-			text={dayjs(date).date()}
+			text={date.date()}
 			value={value}
 			onClick={onClick}
 			className={classNames(
