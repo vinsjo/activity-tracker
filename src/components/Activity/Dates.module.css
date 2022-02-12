@@ -1,4 +1,5 @@
 .button {
+	display: block;
 	width: 100%;
 	height: 100%;
 	height: auto;
@@ -7,7 +8,7 @@
 	border-radius: var(--cal-border-radius);
 	background: white;
 	color: var(--cal-item-color);
-	padding: 1em;
+	padding: 0.5em;
 }
 
 .button:disabled {
