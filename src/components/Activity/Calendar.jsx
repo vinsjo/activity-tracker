@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { isNum } from 'x-is-type';
 import _ from 'lodash-es';
 import dayjs from 'dayjs';
 import { classNames } from '/src/functions';
+import { isNum } from 'x-is-type';
 import Days from './Days';
 import Dates from './Dates';
 import styles from './Calendar.module.css';
@@ -15,9 +15,9 @@ function Calendar({ className, month, completed, onClick }) {
 		const first = month.date(1).day(1);
 		// Sunday of last week in month
 		const last = month.date(month.daysInMonth()).day(7);
-		const diff = last.diff(first, 'day') || 30;
+		const diff = last.diff(first, 'day');
 
-		return _.times(diff, i => {
+		return _.times(diff + 1, i => {
 			const date = !i ? first : first.add(i, 'day');
 			return { date, value: date.format('YYYY-MM-DD') };
 		});

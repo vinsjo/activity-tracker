@@ -15,8 +15,8 @@ function Title({ className, month, title }) {
 	});
 	return (
 		<div className={classNames(styles.container, className)}>
-			<h4 className={styles.month}>{monthName}</h4>
-			<h5>{title}</h5>
+			<h3 className={styles.month}>{monthName}</h3>
+			<p className={styles.title}>{title}</p>
 		</div>
 	);
 }

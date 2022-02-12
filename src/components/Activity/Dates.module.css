@@ -1,8 +1,25 @@
-.dates .date {
+.button {
 	width: 100%;
 	height: 100%;
+	height: auto;
 	border: 3px solid transparent;
+	font-weight: bold;
 	border-radius: var(--cal-border-radius);
 	background: white;
-	color: var(--body-bg);
+	color: var(--cal-item-color);
+	padding: 1em;
+}
+
+.button:disabled {
+	background: transparent;
+	color: var(--cal-item-color-disabled);
+}
+
+.button.current {
+	border-color: var(--cal-item-border-current);
+}
+
+.button.completed {
+	background: var(--cal-item-bg-completed);
+	color: var(--cal-item-color-completed);
 }

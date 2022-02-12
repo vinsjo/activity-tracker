@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from 'uuid';
 import dayjs from 'dayjs';
 import useLocalStorage from './hooks/useLocalStorage';
 import Activity from './components/Activity';
-import InputForm from './components/InputForm';
+import Form from './components/InputForm';
 import './App.css';
 
 function createActivity(title) {
@@ -40,10 +40,7 @@ function App() {
 	return (
 		<div className="App">
 			<header className="content">
-				<InputForm
-					placeholder="Add an activity"
-					onSubmit={handleSubmit}
-				/>
+				<Form placeholder="Add an activity" onSubmit={handleSubmit} />
 			</header>
 			<main className="content">
 				{activities.map(activity => {

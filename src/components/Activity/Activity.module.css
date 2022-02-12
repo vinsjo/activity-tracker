@@ -3,13 +3,33 @@
 	margin: 1rem auto;
 	background: var(--cal-bg);
 	display: grid;
-	grid-template-columns: 1fr 3fr 2rem;
+	grid-template-columns: 1fr 2rem;
+	grid-template-rows: 4rem 1fr;
+	grid-template-areas: 'title title delete' 'calendar calendar .';
 	justify-items: center;
 	align-items: center;
 	padding: var(--cal-outer-padding);
 	gap: var(--cal-outer-padding);
 	border-radius: var(--cal-border-radius);
 }
-.activity .delete {
+
+.title {
+	grid-area: title;
+}
+
+.calendar {
+	grid-area: calendar;
+}
+
+.delete {
 	align-self: start;
+	grid-area: delete;
+}
+
+@media only screen and (min-width: 500px) {
+	.activity {
+		grid-template-columns: 1.5fr 3fr 2rem;
+		grid-template-rows: 1fr;
+		grid-template-areas: 'title calendar delete';
+	}
 }

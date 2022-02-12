@@ -1,3 +1,2 @@
-import Tracker from './Activity';
-
-export default Tracker;
+import Activity from './Activity';
+export default Activity;

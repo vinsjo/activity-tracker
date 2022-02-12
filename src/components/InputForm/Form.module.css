@@ -3,12 +3,11 @@
 	justify-content: center;
 	align-items: center;
 	font-size: 1.25rem;
-	padding: 1rem 0;
 	width: 100%;
 }
 
-.form .button,
-.form .input {
+.button,
+.input {
 	display: block;
 	border: none;
 	outline: none;
@@ -17,7 +16,7 @@
 	font-size: inherit;
 }
 
-.form .button {
+.button {
 	border-radius: 0 3px 3px 0;
 	font-weight: bold;
 	background-color: rgb(75, 75, 75);
@@ -25,7 +24,7 @@
 	flex-shrink: 0;
 }
 
-.form .input {
+.input {
 	border-radius: 3px 0 0 3px;
 	width: 100%;
 }

@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { Button } from './buttons';
-import styles from './InputForm.module.css';
+import { Button } from '../buttons';
+import TextInput from './TextInput';
+import styles from './Form.module.css';
 
 function InputForm({ placeholder, onSubmit }) {
 	const [input, setInput] = useState('');
@@ -22,15 +23,12 @@ function InputForm({ placeholder, onSubmit }) {
 			onSubmit={handleSubmit}
 			autoComplete="off"
 		>
-			<input
-				className={styles.input}
-				id="input"
-				type="text"
-				onChange={handleChange}
+			<TextInput
 				value={input}
-				placeholder={placeholder || ''}
+				placeholder={placeholder}
+				onChange={handleChange}
 			/>
-			<Button className={styles.button} type="submit" text="Submit" />
+			<Button className={styles.button} type="submit" text="Add" />
 		</form>
 	);
 }

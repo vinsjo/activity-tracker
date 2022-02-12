@@ -2,7 +2,7 @@
 	--body-bg: #292929;
 
 	--cal-border-radius: 5px;
-	--cal-outer-padding: 0.5rem;
+	--cal-outer-padding: 1rem;
 	--cal-grid-gap: calc(var(--cal-outer-padding) * 0.5);
 
 	--cal-bg: rgb(200, 200, 200);
@@ -26,9 +26,9 @@ body {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	/* justify-content: center; */
 	font-size: calc(10px + 2vmin);
 	color: white;
+	padding: 1rem;
 }
 
 .App > .content {
