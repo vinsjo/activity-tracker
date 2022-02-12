@@ -1,7 +1,7 @@
 import Button from './Button';
 import { MdRemoveCircle } from 'react-icons/md';
 import styles from './DeleteButton.module.css';
-import { classNames } from '/src/functions/helpers';
+import { classNames } from '/src/functions';
 
 function DeleteButton({ className, value, disabled, onClick }) {
 	return (

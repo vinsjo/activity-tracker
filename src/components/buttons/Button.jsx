@@ -1,4 +1,4 @@
-import { classNames } from '/src/functions/helpers';
+import { classNames } from '/src/functions';
 import styles from './Button.module.css';
 
 function Button({

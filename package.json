@@ -13,7 +13,8 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-icons": "^4.3.1",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "x-is-type": "^1.0.3"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^1.0.7",

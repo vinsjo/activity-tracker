@@ -1,8 +1,7 @@
-import { useCallback } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import dayjs from 'dayjs';
 import useLocalStorage from './hooks/useLocalStorage';
-import Calendar from './components/Calendar';
+import Activity from './components/Activity';
 import InputForm from './components/InputForm';
 import './App.css';
 
@@ -20,35 +19,23 @@ function App() {
 		'activity-tracker-stored-activities'
 	);
 
-	const handleSubmit = useCallback(
-		input => {
-			setActivities([...activities, createActivity(input)]);
-		},
-		[activities, setActivities]
-	);
+	function handleSubmit(input) {
+		setActivities([...activities, createActivity(input)]);
+	}
 
-	const handleActivityDateClick = useCallback(
-		({ id, value }) => {
-			const activity = activities.find(a => a.id === id);
-			if (!activity) return;
-			const { completed } = activity;
-			const i = completed.indexOf(value);
-			i < 0 ? completed.push(value) : completed.splice(i, 1);
-			activity.completed = [...completed];
-			setActivities([...activities]);
-		},
-		[activities, setActivities]
-	);
+	function handleDateClick(value, activity) {
+		const { completed } = activity;
+		const i = completed.indexOf(value);
+		i < 0 ? completed.push(value) : completed.splice(i, 1);
+		setActivities([...activities]);
+	}
 
-	const handleActivityDelete = useCallback(
-		({ id }) => {
-			const i = activities.findIndex(a => a.id === id);
-			if (i < 0) return;
-			activities.splice(i, 1);
-			setActivities([...activities]);
-		},
-		[activities, setActivities]
-	);
+	function handleDeleteClick(activity) {
+		const i = activities.indexOf(activity);
+		if (i < 0) return;
+		activities.splice(i, 1);
+		setActivities([...activities]);
+	}
 
 	return (
 		<div className="App">
@@ -59,16 +46,13 @@ function App() {
 				/>
 			</header>
 			<main className="content">
-				{activities.map(({ id, title, month, completed }) => {
+				{activities.map(activity => {
 					return (
-						<Calendar
-							key={id}
-							id={id}
-							title={title}
-							month={month}
-							completed={completed}
-							onClick={handleActivityDateClick}
-							onDelete={handleActivityDelete}
+						<Activity
+							key={activity.id}
+							activity={activity}
+							onClick={value => handleDateClick(value, activity)}
+							onDelete={() => handleDeleteClick(activity)}
 						/>
 					);
 				})}
