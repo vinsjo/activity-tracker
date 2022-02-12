@@ -1,49 +1,58 @@
 import { useState, useCallback } from 'react';
 
-function storeData(data, storageKey) {
+/**
+ * @param {String} key
+ * @param {any} value
+ */
+function setStorageItem(key, value) {
 	try {
-		if (!data) throw 'No data received';
-		const json = JSON.stringify(data);
-		localStorage.setItem(storageKey, json);
-		return true;
+		if (!key) throw `Invalid local storage key: ${key}`;
+		localStorage.setItem(
+			key,
+			value === undefined || value === null
+				? ''
+				: typeof value === 'string'
+				? value
+				: JSON.stringify(value)
+		);
+		return value;
 	} catch (e) {
 		console.error(e);
-		return false;
+		return null;
 	}
 }
-function getStoredData(storageKey) {
-	const data = (() => {
-		try {
-			return JSON.parse(localStorage.getItem(storageKey));
-		} catch (e) {
-			console.error(e);
-			return null;
-		}
-	})();
-	if (!data) {
-		storeData([]);
-		return [];
+/**
+ * @param {String} key
+ */
+function getStorageItem(key) {
+	try {
+		return JSON.parse(localStorage.getItem(key));
+	} catch (e) {
+		console.error(e);
+		return null;
 	}
-	return data;
 }
 
 /**
- * @param {String} storageKey  key to an item in localStorage
+ * @param {String} key  key to an item in localStorage
  */
-function useLocalStorage(storageKey) {
-	const [storedData, setStoredData] = useState(() =>
-		getStoredData(storageKey)
-	);
+function useLocalStorage(key, initialValue = []) {
+	const [data, setData] = useState(() => {
+		const data = getStorageItem(key);
+		if (!data) {
+			setStorageItem(key, initialValue);
+			return initialValue;
+		}
+		return data;
+	});
 
 	const updateData = useCallback(
-		data => {
-			if (!storeData(data, storageKey)) return;
-			setStoredData(data);
-		},
-		[storageKey, storedData, setStoredData]
+		value => setData(setStorageItem(key, value) || []),
+		[key, data, setData]
 	);
 
-	return [storedData, updateData];
+	return [data, updateData];
 }
 
 export default useLocalStorage;
+export { getStorageItem, setStorageItem };

@@ -2,13 +2,10 @@
   "name": "activity-tracker",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://vinsjo.github.io/activity-tracker",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "preview": "vite preview"
   },
   "dependencies": {
     "dayjs": "^1.10.7",
@@ -20,7 +17,6 @@
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^1.0.7",
-    "gh-pages": "^3.2.3",
     "vite": "^2.8.0"
   }
 }
